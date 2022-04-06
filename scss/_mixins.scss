@@ -1,0 +1,153 @@
+@mixin borderedRectangle($border-radius, $background) {
+    border-radius: $border-radius;
+    background-color: $background;
+    padding: 16px;
+}
+// sm md lg
+@mixin buttonMixins($backgroundColor, $color, $size:'md'){
+    background-color: $backgroundColor;
+    color: $color;
+    @if ($size == 'sm') {
+        font-size: 16px;
+        max-width: 150px;
+        min-width: 70px;
+    } @else if($size == 'md'){
+        font-size: 24px;
+        max-width: 200px;
+        min-width: 120px;
+    }@else if($size == 'lg'){
+        font-size: 32px;
+        max-width: 300px;
+        min-width: 220px;
+    }
+}
+
+
+@mixin triangle (
+        $top-left:true,
+        $top-right:false,
+        $bottom-left:false,
+        $bottom-right:false,
+        $color:red
+                    ) {
+        $size:30px;
+        position: relative;
+        &:after{
+            content: "";
+            width: $size;
+            height: $size;
+            // background-color: red;
+            position: absolute;
+            border: $size/2 solid transparent;
+            
+            @if $top-left {
+                top: 0;
+                left: -$size/2;
+                border: $size/2 solid transparent;
+                border-top-color:$color ;
+            } @else if $top-right {
+                top: 0;
+                right: -$size/2;
+                border-top-color:$color ;
+            }
+            @else if $bottom-right {
+                bottom: 0;
+                right: -$size/2;
+                
+                border-bottom-color:$color ;
+            }
+            @else if $bottom-left {
+                bottom: 0;
+                left: -$size/2;
+                border-bottom-color:$color ;
+            }
+        }
+}
+
+
+
+@mixin tooltip ($position:'top'){
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    $size:7px;
+    &:after{
+        
+        content: attr(data-tooltip);
+        position: absolute;
+        font-size: 12px;
+        width: max-content;
+        background-color: black;
+        color: white;
+        padding: 8px;
+        border-radius: 8px;
+        
+        
+    }
+
+    &::before{
+        
+        content: "";
+        width: 2*$size;
+        height: 2*$size;
+        position: absolute;
+        border: $size solid transparent;
+        
+    }
+
+    @if $position == 'top'{
+
+        &::after{
+            bottom: 100%;
+            margin-bottom: $size;
+        }
+        &::before{
+            border-top-color: black;
+            top: -$size;
+        }
+    }@else if $position == 'bottom'{
+        &::after{
+            top: 100%;
+            margin-top: $size;
+        }
+        &::before{
+            border-bottom-color: black;
+            bottom: -$size;
+        }
+    }
+    @else if $position == 'left'{
+        &::after{
+            right: 100%;
+            margin-right: $size;
+        }
+        &::before{
+            border-left-color: black;
+            left: -$size;
+        }
+    }
+
+    @else if $position == 'right'{
+        &::after{
+            left: 100%;
+            margin-left: $size;
+        }
+        &::before{
+            border-right-color: black;
+            right: -$size;
+        }
+    }
+
+
+    &::after, &::before{
+        opacity: 0;
+        visibility: hidden;
+        transition: .4s;
+    }
+    &:hover::after, &:hover::before{
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+

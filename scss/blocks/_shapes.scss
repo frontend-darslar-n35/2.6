@@ -1,0 +1,20 @@
+.shapes{
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    .box{
+        @include borderedRectangle(20px, red);
+    }
+
+    .btn{
+        @include buttonMixins(blue, white);
+    }
+
+    .table{
+        border: 1px solid red;
+        border-collapse: collapse;
+        & td{
+            padding: 0;
+        }
+    }
+}

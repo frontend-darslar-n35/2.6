@@ -1,0 +1,19 @@
+.messages{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .message{
+        $messageColor:#bcc1c5;
+        min-width: 300px;
+        max-width: 600px;
+        background-color:$messageColor;
+        color: black;
+        padding: 17px;
+        border-radius: 8px;
+        @include triangle(false, false,true, false, $messageColor);
+        margin: 10px;
+    }
+}

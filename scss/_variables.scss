@@ -1,0 +1,6 @@
+$red :red;
+
+:root{
+    --text-color:#{$red};
+    --border-style: 2px solid #{$red};
+}
